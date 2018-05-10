@@ -1,0 +1,38 @@
+{
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "./node_modules/.bin/eslint .",
+    "serve": "firebase serve --only functions",
+    "shell": "firebase experimental:functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "connect-session-firebase": "^5.8.0",
+    "consolidate": "^0.15.0",
+    "cookie-parser": "^1.4.3",
+    "errorhandler": "^1.5.0",
+    "express": "^4.16.2",
+    "express-fileupload": "^0.4.0",
+    "express-session": "^1.15.6",
+    "express-validator": "^4.3.0",
+    "firebase": "^4.10.0",
+    "firebase-admin": "~5.8.1",
+    "firebase-app": "0.0.1",
+    "firebase-functions": "^0.8.1",
+    "google-auth-library": "^0.12.0",
+    "googleapis": "^25.0.0",
+    "handlebars": "^4.0.11",
+    "jquery": "^3.3.1",
+    "morgan": "^1.9.0",
+    "session": "^0.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.12.0",
+    "eslint-plugin-promise": "^3.6.0"
+  },
+  "private": true
+}

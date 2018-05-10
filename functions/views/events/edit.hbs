@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<!-- 
+	Copyright 2018 Travis Spinelli
+	
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.  
+	You may obtain a copy of the License at
+	
+	http://www.apache.org/licenses/LICENSE-2.0
+	
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+-->
+<head>
+    <meta charset="utf-8">
+	<title>Events - Edit</title>
+
+	<link rel="stylesheet" type="text/css" href="../../../common/style.css" />
+	<script type="text/javascript" src="../../../assets/bootstrap/js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="../../../assets/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../assets/DataTables/datatables.min.js"></script>
+</head>
+<body>
+	<div id="wrapper">
+
+		<!-- Navbar Start -->
+		<div id="nav" class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container col-xs-12">
+				<div class="navbar-header">
+					<img src="../../../images/Champlain_Compass_Logo.png" alt="Champlain Compass Logo" class="logo_img" />
+					<a class="navbar-brand navbar-brand-logo" href="/index/{{sessionId}}">Champlain Compass</a>
+					
+					<button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#navbar-list" aria-expanded="false">
+						<span class="sr-only">Toggle Navigation</span>
+						<span class="fa fa-bars"></span>
+					</button>
+				</div>
+				
+				<div id="navbar-list" class="navbar-collapse collapse" aria-expanded="false">
+					<ul class="nav navbar-nav list-group">
+						<li>
+							<a href="/buildings/{{sessionId}}">Buildings</a>
+						</li>
+						<li class="active">
+							<a href="/events/{{sessionId}}">Events</a>
+						</li>
+						<li>
+							<a href="/faqs/{{sessionId}}">FAQs</a>
+						</li>
+						<li>
+							<a href="/presenters/{{sessionId}}">Presenters</a>
+						</li>
+						<li>
+							<a href="/resources/{{sessionId}}">Resources</a>
+						</li>
+						<li>
+							<a href="/themes/{{sessionId}}">Themes</a>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Files <span class="fa fa-caret-down"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="/files/{{sessionId}}">Logos</a></li>
+								<li><a href="/files/{{sessionId}}/resources">Resources</a></li>
+							</ul>
+						</li>
+						<li>
+							<a href="/logout/{{sessionId}}">Logout</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- Navbar End -->
+
+		<!-- Main Content Start -->
+		<div id="content">
+			<h1>Edit Event</h1>
+
+			<form name="edit_event_form" action="/events/{{sessionId}}/edit" method="POST">
+				<div class="col-sm-12 form-div">
+					<label for="name" class="form-label col-sm-3">Event Name: </label>
+					<div class="col-sm-7 {{#if errors.name}} has-error {{/if}}">
+						<input name="name" id="name" class="form-control" type="text" value="{{event.Name}}" />
+						{{#if errors.name}}
+							<div class="danger well well-sm">
+								<p>{{errors.name.msg}}</p>
+							</div>
+						{{/if}}
+					</div>
+				</div>
+
+				<div class="col-sm-12 form-div">
+					<label for="description" class="form-label col-sm-3">Description: </label>
+					<div class="col-sm-7 {{#if errors.description}} has-error {{/if}}">
+						<textarea name="description" id="description" class="form-control">{{event.Description}}</textarea>
+						{{#if errors.description}}
+							<div class="danger well well-sm">
+								<p>{{errors.description.msg}}</p>
+							</div>
+						{{/if}}
+					</div>
+				</div>
+
+				<div class="col-sm-12 form-div">
+					<div class="form-label col-sm-3">
+						<label for="presenter" class="form-label">Presenter: </label>
+						<button type="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" class="fa fa-info-circle btn btn-link" title="Presenter" data-content="The Presenter field is used to set who the presenter for the event is. Use the dropdown menu to select a valid presenter."></button>
+					</div>
+					<div class="col-sm-7 {{#if errors.presenter}} has-error {{/if}}">
+						<select name="presenter" id="presenter" class="form-control">
+							{{#each presenters}}
+								<option value="{{value}}">{{text}}</option>
+							{{/each}}
+						</select>
+						{{#if errors.presenter}}
+							<div class="danger well well-sm">
+								<p>{{errors.presenter.msg}}</p>
+							</div>
+						{{/if}}
+					</div>
+				</div>
+
+				<div class="col-sm-12 form-div">
+					<div class="form-label col-sm-3">
+						<label for="location" class="form-label">Location: </label>
+						<button type="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" class="fa fa-info-circle btn btn-link" title="Location" data-content="The Location field is used to set the location of the event. This will most likely be a building and room on campus, but can take any form."></button>
+					</div>
+					<div class="col-sm-7 {{#if errors.location}} has-error {{/if}}">
+						<input name="location" id="location" class="form-control" type="text" value="{{event.Location}}" />
+						{{#if errors.location}}
+							<div class="danger well well-sm">
+								<p>{{errors.location.msg}}</p>
+							</div>
+						{{/if}}
+					</div>
+				</div>
+
+				<div class="col-sm-12">
+					<h4 class="col-md-10 col-md-offset-1">Groups</h4>
+					<div class="col-sm-12 form-div">
+						<div class="form-label col-sm-3">
+							<label for="groups_family" class="form-label">Family &amp; Friends: </label>
+							<button type="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" class="fa fa-info-circle btn btn-link" title="Family & Friends" data-content="The Family & Friends field is used to set the event as being visible by user in the Family & Friends section of the app. This should be done if the event is found on the Family & Friends schedule of events for Orientation."></button>
+						</div>
+						<div class="col-sm-7">
+							<input name="groups_family" id="groups_family" class="form-control" type="checkbox" {{#if event.CheckedGroups.family }}checked="checked"{{/if}} />
+						</div>
+					</div>
+
+					<div class="col-sm-12 form-div">
+						<div class="form-label col-sm-3">
+							<label for="groups_res_students" class="form-label">Residential Students: </label>
+							<button type="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" class="fa fa-info-circle btn btn-link" title="Residential Students" data-content="The Residential Students field is used to set the event as being visible by user in the Residential Students section of the app. This should be done if the event is found on the Residential Students schedule of events for Orientation."></button>
+						</div>
+						<div class="col-sm-7">
+							<input name="groups_res_students" id="groups_res_students" class="form-control" type="checkbox" {{#if event.CheckedGroups.residential }}checked="checked"{{/if}} />
+						</div>
+					</div>
+
+					<div class="col-sm-12 form-div">
+						<div class="form-label col-sm-3">
+							<label for="groups_com_students" class="form-label">Commuter Students: </label>
+							<button type="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" class="fa fa-info-circle btn btn-link" title="Commuter Students" data-content="The Commuter Students field is used to set the event as being visible by user in the Commuter Students section of the app. This should be done if the event is found on the Commuter Students schedule of events for Orientation."></button>
+						</div>
+						<div class="col-sm-7">
+							<input name="groups_com_students" id="groups_com_students" class="form-control" type="checkbox" {{#if event.CheckedGroups.commuter }}checked="checked"{{/if}} />
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-12 form-div">
+					<label for="start_time" class="form-label col-sm-3">Start Time: </label>
+					<div class="col-sm-7 {{#if errors.start_time}} has-error {{/if}}">
+						<input name="start_time" id="start_time" class="form-control" type="datetime-local" value="{{event.Start_Time}}" />
+						{{#if errors.start_time}}
+							<div class="danger well well-sm">
+								<p>{{errors.start_time.msg}}</p>
+							</div>
+						{{/if}}
+					</div>
+				</div>
+
+				<div class="col-sm-12 form-div">
+					<label for="end_time" class="form-label col-sm-3">End Time: </label>
+					<div class="col-sm-7 {{#if errors.end_time}} has-error {{/if}}">
+						<input name="end_time" id="end_time" class="form-control" type="datetime-local" value="{{event.End_Time}}" />
+						{{#if errors.end_time}}
+							<div class="danger well well-sm">
+								<p>{{errors.end_time.msg}}</p>
+							</div>
+						{{/if}}
+					</div>
+				</div>
+
+				<div class="col-sm-12 form-button-div">
+					<input type="hidden" name="eventId" id="eventId" class="form-control" value="{{eventId}}" />
+					<button class="btn btn-primary" type="submit">Save</button>
+					<a class="btn btn-default" href="/events/{{sessionId}}">Cancel</a>
+				</div>
+			</form>
+
+		</div>
+		<!-- Main Content End -->
+
+		<script type="text/javascript">
+			$(function() {
+			  $('[data-toggle="popover"]').popover()
+			});
+		</script>
+
+		{{#if event.Presenter}} 
+		<script type="text/javascript">
+			$(function() {
+		  		$("#presenter").val("{{event.Presenter}}");
+		  	});
+		</script>
+		{{/if}}
+
+	</div>
+</body>
+</html>

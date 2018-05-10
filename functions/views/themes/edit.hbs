@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<!-- 
+	Copyright 2018 Travis Spinelli
+	
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.  
+	You may obtain a copy of the License at
+	
+	http://www.apache.org/licenses/LICENSE-2.0
+	
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+-->
+<head>
+    <meta charset="utf-8">
+	<title>Orientation Themes - Edit</title>
+
+	<link rel="stylesheet" type="text/css" href="../../../common/style.css" />
+	<script type="text/javascript" src="../../../assets/bootstrap/js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="../../../assets/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../assets/DataTables/datatables.min.js"></script>
+</head>
+<body>
+	<div id="wrapper">
+
+		<!-- Navbar Start -->
+		<div id="nav" class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container col-xs-12">
+				<div class="navbar-header">
+					<img src="../../../images/Champlain_Compass_Logo.png" alt="Champlain Compass Logo" class="logo_img" />
+					<a class="navbar-brand navbar-brand-logo" href="/index/{{sessionId}}">Champlain Compass</a>
+					
+					<button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#navbar-list" aria-expanded="false">
+						<span class="sr-only">Toggle Navigation</span>
+						<span class="fa fa-bars"></span>
+					</button>
+				</div>
+				
+				<div id="navbar-list" class="navbar-collapse collapse" aria-expanded="false">
+					<ul class="nav navbar-nav list-group">
+						<li>
+							<a href="/buildings/{{sessionId}}">Buildings</a>
+						</li>
+						<li>
+							<a href="/events/{{sessionId}}">Events</a>
+						</li>
+						<li>
+							<a href="/faqs/{{sessionId}}">FAQs</a>
+						</li>
+						<li>
+							<a href="/presenters/{{sessionId}}">Presenters</a>
+						</li>
+						<li>
+							<a href="/resources/{{sessionId}}">Resources</a>
+						</li>
+						<li class="active">
+							<a href="/themes/{{sessionId}}">Themes</a>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Files <span class="fa fa-caret-down"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="/files/{{sessionId}}">Logos</a></li>
+								<li><a href="/files/{{sessionId}}/resources">Resources</a></li>
+							</ul>
+						</li>
+						<li>
+							<a href="/logout/{{sessionId}}">Logout</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- Navbar End -->
+
+		<!-- Main Content Start -->
+		<div id="content">
+			<h1>Edit Orientation Theme</h1>
+
+			<form name="edit_theme_form" action="/themes/{{sessionId}}/edit" method="POST">
+				<div class="col-sm-12 form-div">
+					<label for="theme_name" class="form-label col-sm-3">Theme Name: </label>
+					<div class="col-sm-7 {{#if errors.theme_name}} has-error {{/if}}">
+						<input name="theme_name" id="theme_name" class="form-control" type="text" value="{{theme.Theme_Name}}" />
+						{{#if errors.theme_name}}
+							<div class="danger well well-sm">
+								<p>{{errors.theme_name.msg}}</p>
+							</div>
+						{{/if}}
+					</div>
+				</div>
+
+				<div class="col-sm-12 form-div">
+					<label for="description" class="form-label col-sm-3">Description: </label>
+					<div class="col-sm-7 {{#if errors.description}} has-error {{/if}}">
+						<textarea name="description" id="description" class="form-control">{{theme.Description}}</textarea>
+						{{#if errors.description}}
+							<div class="danger well well-sm">
+								<p>{{errors.description.msg}}</p>
+							</div>
+						{{/if}}
+					</div>
+				</div>
+
+				<div class="col-sm-12 form-div">
+					<div class="form-label col-sm-3">
+						<label for="semester" class="form-label">Semester: </label>
+						<button type="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" class="fa fa-info-circle btn btn-link" title="Semster" data-content="The Semester field is used in two ways. The first is to identify the semester that this orientation theme was meant for, say Fall of 2017. The second is as a key to distinguish this theme from all other themes. Please enter text into this area which follows this format: Semester Year. EX: Fall 2017"></button>
+					</div>
+					<div class="col-sm-7 {{#if errors.semester}} has-error {{/if}}">
+						<input name="semester" id="semester" class="form-control" type="text" value="{{theme.Semester}}" />
+						{{#if errors.semester}}
+							<div class="danger well well-sm">
+								<p>{{errors.semester.msg}}</p>
+							</div>
+						{{/if}}
+					</div>
+				</div>
+
+				<div class="col-sm-12">
+					<h4 class="col-md-10 col-md-offset-1">Logo</h4>
+					<div class="col-sm-12 form-div">
+						<div class="form-label col-sm-3">
+							<label for="logo_file_name" class="form-label">File Name: </label>
+							<button type="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" class="fa fa-info-circle btn btn-link" title="File Name" data-content="The File Name field is use to determine the file to be selected. Please use the extact file name including the extension."></button>
+						</div>
+						<div class="col-sm-7 {{#if errors.logo_file_name}} has-error {{/if}}">
+							<input name="logo_file_name" id="logo_file_name" class="form-control" type="text" value="{{theme.Logo.File_Name}}" />
+							{{#if errors.logo_file_name}}
+								<div class="danger well well-sm">
+									<p>{{errors.logo_file_name.msg}}</p>
+								</div>
+							{{/if}}
+						</div>
+					</div>
+
+					<div class="col-sm-12 form-div">
+						<label for="logo_description" class="form-label col-sm-3">File Description: </label>
+						<div class="col-sm-7 {{#if errors.logo_description}} has-error {{/if}}">
+							<input name="logo_description" id="logo_description" class="form-control" type="text" value="{{theme.Logo.Description}}" />
+							{{#if errors.logo_description}}
+								<div class="danger well well-sm">
+									<p>{{errors.logo_description.msg}}</p>
+								</div>
+							{{/if}}
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-12">
+					<h4 class="col-md-10 col-md-offset-1">Theme Colors</h4>
+					<div class="col-sm-12 form-div">
+						<div class="form-label col-sm-3">
+							<label for="theme_colors_primary" class="form-label">Primary: </label>
+							<button type="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-html="true" class="fa fa-info-circle btn btn-link" title="Color" data-content="This field requires a hexadecimal color code as its value. This code should come in the format of a # and then six values. To discover color code please use <a href='https://color.adobe.com/' target='new'>this link</a>. EX: #FF0045"></button>
+						</div>
+						<div class="col-sm-7 {{#if errors.theme_colors_primary}} has-error {{/if}}">
+							<input name="theme_colors_primary" id="theme_colors_primary" class="form-control" type="text" value="{{theme.Theme_Colors.Primary}}" />
+							{{#if errors.theme_colors_primary}}
+								<div class="danger well well-sm">
+									<p>{{errors.theme_colors_primary.msg}}</p>
+								</div>
+							{{/if}}
+						</div>
+					</div>
+
+					<div class="col-sm-12 form-div">
+						<div class="form-label col-sm-3">
+							<label for="theme_colors_secondary" class="form-label">Secondary: </label>
+							<button type="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-html="true" class="fa fa-info-circle btn btn-link" title="Color" data-content="This field requires a hexadecimal color code as its value. This code should come in the format of a # and then six values. To discover color code please use <a href='https://color.adobe.com/' target='new'>this link</a>. EX: #FF0045"></button>
+						</div>
+						<div class="col-sm-7 {{#if errors.theme_colors_secondary}} has-error {{/if}}">
+							<input name="theme_colors_secondary" id="theme_colors_secondary" class="form-control" type="text" value="{{theme.Theme_Colors.Secondary}}" />
+							{{#if errors.theme_colors_secondary}}
+								<div class="danger well well-sm">
+									<p>{{errors.theme_colors_secondary.msg}}</p>
+								</div>
+							{{/if}}
+						</div>
+					</div>
+
+					<div class="col-sm-12 form-div">
+						<div class="form-label col-sm-3">
+							<label for="theme_colors_title" class="form-label">Title: </label>
+							<button type="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-html="true" class="fa fa-info-circle btn btn-link" title="Color" data-content="This field requires a hexadecimal color code as its value. This code should come in the format of a # and then six values. To discover color code please use <a href='https://color.adobe.com/' target='new'>this link</a>. EX: #FF0045"></button>
+						</div>
+						<div class="col-sm-7 {{#if errors.theme_colors_title}} has-error {{/if}}">
+							<input name="theme_colors_title" id="theme_colors_title" class="form-control" type="text" value="{{theme.Theme_Colors.Title}}" />
+							{{#if errors.theme_colors_title}}
+								<div class="danger well well-sm">
+									<p>{{errors.theme_colors_title.msg}}</p>
+								</div>
+							{{/if}}
+						</div>
+					</div>
+
+					<div class="col-sm-12 form-div">
+						<div class="form-label col-sm-3">
+							<label for="theme_colors_text" class="form-label">Text: </label>
+							<button type="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-html="true" class="fa fa-info-circle btn btn-link" title="Color" data-content="This field requires a hexadecimal color code as its value. This code should come in the format of a # and then six values. To discover color code please use <a href='https://color.adobe.com/' target='new'>this link</a>. EX: #FF0045"></button>
+						</div>
+						<div class="col-sm-7 {{#if errors.theme_colors_text}} has-error {{/if}}">
+							<input name="theme_colors_text" id="theme_colors_text" class="form-control" type="text" value="{{theme.Theme_Colors.Text}}" />
+							{{#if errors.theme_colors_text}}
+								<div class="danger well well-sm">
+									<p>{{errors.theme_colors_text.msg}}</p>
+								</div>
+							{{/if}}
+						</div>
+					</div>
+
+					<div class="col-sm-12 form-div">
+						<div class="form-label col-sm-3">
+							<label for="theme_colors_text_secondary" class="form-label">Text Secondary: </label>
+							<button type="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-html="true" class="fa fa-info-circle btn btn-link" title="Color" data-content="This field requires a hexadecimal color code as its value. This code should come in the format of a # and then six values. To discover color code please use <a href='https://color.adobe.com/' target='new'>this link</a>. EX: #FF0045"></button>
+						</div>
+						<div class="col-sm-7 {{#if errors.theme_colors_text_secondary}} has-error {{/if}}">
+							<input name="theme_colors_text_secondary" id="theme_colors_text_secondary" class="form-control" type="text" value="{{theme.Theme_Colors.Text_Secondary}}" />
+							{{#if errors.theme_colors_text_secondary}}
+								<div class="danger well well-sm">
+									<p>{{errors.theme_colors_text_secondary.msg}}</p>
+								</div>
+							{{/if}}
+						</div>
+					</div>
+
+					<div class="col-sm-12 form-div">
+						<div class="form-label col-sm-3">
+							<label for="theme_colors_shadow" class="form-label">Text Shadow: </label>
+							<button type="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-html="true" class="fa fa-info-circle btn btn-link" title="Color" data-content="This field requires a hexadecimal color code as its value. This code should come in the format of a # and then six values. To discover color code please use <a href='https://color.adobe.com/' target='new'>this link</a>. EX: #FF0045"></button>
+						</div>
+						<div class="col-sm-7 {{#if errors.theme_colors_shadow}} has-error {{/if}}">
+							<input name="theme_colors_shadow" id="theme_colors_shadow" class="form-control" type="text" value="{{theme.Theme_Colors.Shadow}}" />
+							{{#if errors.theme_colors_shadow}}
+								<div class="danger well well-sm">
+									<p>{{errors.theme_colors_shadow.msg}}</p>
+								</div>
+							{{/if}}
+						</div>
+					</div>
+
+					<div class="col-sm-12 form-div">
+						<div class="form-label col-sm-3">
+							<label for="theme_colors_text_click" class="form-label">Click Text: </label>
+							<button type="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-html="true" class="fa fa-info-circle btn btn-link" title="Color" data-content="This field requires a hexadecimal color code as its value. This code should come in the format of a # and then six values. To discover color code please use <a href='https://color.adobe.com/' target='new'>this link</a>. EX: #FF0045"></button>
+						</div>
+						<div class="col-sm-7 {{#if errors.theme_colors_text_click}} has-error {{/if}}">
+							<input name="theme_colors_text_click" id="theme_colors_text_click" class="form-control" type="text" value="{{theme.Theme_Colors.Text_Click}}" />
+							{{#if errors.theme_colors_text_click}}
+								<div class="danger well well-sm">
+									<p>{{errors.theme_colors_text_click.msg}}</p>
+								</div>
+							{{/if}}
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-12 form-div">
+					<div class="form-label col-sm-3">
+						<label for="is_current" class="form-label">Is Current: </label>
+						<button type="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" class="fa fa-info-circle btn btn-link" title="Is Current" data-content="The Is Current field is used to determine if this is the current orientation theme. There should only ever be one current theme and when you set a theme to current you must remember to set the other themes to no longer be current."></button>
+					</div>
+					<div class="col-sm-7">
+						<input name="is_current" id="is_current" class="form-control" type="checkbox" {{#if theme.Is_Current}} checked="checked" {{/if}} />
+					</div>
+				</div>
+
+				<div class="col-sm-12 form-button-div">
+					<input type="hidden" name="themeId" id="themeId" class="form-control" value="{{themeId}}" />
+					<button class="btn btn-primary" type="submit">Save</button>
+					<a class="btn btn-default" href="/themes/{{sessionId}}">Cancel</a>
+				</div>
+			</form>
+
+		</div>
+		<!-- Main Content End -->
+
+		<script type="text/javascript">
+			$(function() {
+			  $('[data-toggle="popover"]').popover()
+			});
+		</script>
+
+	</div>
+</body>
+</html>

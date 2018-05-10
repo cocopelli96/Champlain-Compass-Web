@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<!-- 
+	Copyright 2018 Travis Spinelli
+	
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.  
+	You may obtain a copy of the License at
+	
+	http://www.apache.org/licenses/LICENSE-2.0
+	
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+-->
+<head>
+    <meta charset="utf-8">
+	<title>Buildings</title>
+
+	<link rel="stylesheet" type="text/css" href="../../common/style.css" />
+	<script type="text/javascript" src="../../assets/bootstrap/js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="../../assets/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../assets/DataTables/datatables.min.js"></script>
+</head>
+<body>
+	<div id="wrapper">
+
+		<!-- Navbar Start -->
+		<div id="nav" class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container col-xs-12">
+				<div class="navbar-header">
+					<img src="../../images/Champlain_Compass_Logo.png" alt="Champlain Compass Logo" class="logo_img" />
+					<a class="navbar-brand navbar-brand-logo" href="/index/{{sessionId}}">Champlain Compass</a>
+					
+					<button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#navbar-list" aria-expanded="false">
+						<span class="sr-only">Toggle Navigation</span>
+						<span class="fa fa-bars"></span>
+					</button>
+				</div>
+				
+				<div id="navbar-list" class="navbar-collapse collapse" aria-expanded="false">
+					<ul class="nav navbar-nav list-group">
+						<li class="active">
+							<a href="/buildings/{{sessionId}}">Buildings</a>
+						</li>
+						<li>
+							<a href="/events/{{sessionId}}">Events</a>
+						</li>
+						<li>
+							<a href="/faqs/{{sessionId}}">FAQs</a>
+						</li>
+						<li>
+							<a href="/presenters/{{sessionId}}">Presenters</a>
+						</li>
+						<li>
+							<a href="/resources/{{sessionId}}">Resources</a>
+						</li>
+						<li>
+							<a href="/themes/{{sessionId}}">Themes</a>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Files <span class="fa fa-caret-down"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="/files/{{sessionId}}">Logos</a></li>
+								<li><a href="/files/{{sessionId}}/resources">Resources</a></li>
+							</ul>
+						</li>
+						<li>
+							<a href="/logout/{{sessionId}}">Logout</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- Navbar End -->
+
+		<!-- Main Content Start -->
+		<div id="content">
+			<h1>Buildings</h1>
+
+			<div class="new_button_div">
+				<a class="btn btn-default" href="/buildings/{{sessionId}}/create"><i class="fa fa-plus"></i> New</a>
+			</div>
+
+			<table class="datatables display">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Address</th>
+						<th>Is Active</th>
+						<th>Edit</th>
+						<th>Delete</th>
+					</tr>
+				</thead>
+				<tbody>
+				{{#each buildings as |building buildingId|}}
+					<tr>
+						<td>{{Name}}</td>
+						<td>{{Address}}</td>
+						<td>{{Is_Active}}</td>
+						<td>
+							<a class="btn btn-default" href="/buildings/{{../sessionId}}/edit/{{buildingId}}"><i class="fa fa-pencil"></i> Edit</a>
+						</td>
+						<td>
+							<button class="btn btn-default" data-toggle="modal" data-target="#delete-modal" data-to-delete-id="{{buildingId}}"><i class="fa fa-trash"></i> Delete</button>
+						</td>
+					</tr>
+				{{/each}}
+				</tbody>
+			</table>
+		</div>
+		<!-- Main Content End -->
+
+		<!-- Modal Windows -->
+		<div id="delete-modal" class="modal fade" tabindex="-1" role="dialog">
+		  	<div class="modal-dialog" role="document">
+			    <div class="modal-content">
+				    <div class="modal-header">
+				    	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				    	<h4 class="modal-title">Delete</h4>
+				    </div>
+				    <form name="delete_building_form" action="/buildings/{{sessionId}}/delete" method="POST">
+					    <div class="modal-body">
+					    	<p>Do you really want to delete this building?</p>
+					    	<div class="alert alert-danger"><span class="fa-danger fa fa-warning"></span> Once you delete the building there is no way to undo what has been done. This is a permenant delete.</div>
+					    </div>
+					    <div class="modal-footer">
+							<input type="hidden" name="buildingId" id="buildingId" class="form-control" />
+					    	<button type="submit" class="btn btn-danger">Delete</button>
+					    	<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					    </div>
+					</form>
+			    </div>
+		  	</div>
+		</div>
+		<!-- Modal Windows End -->
+
+		<!-- JavaScript for the page Start -->
+		<script>
+			(function() {
+				$('.datatables').DataTable({
+					"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
+				});
+
+				$('.dataTables_length select').addClass("form-control");
+				$('.dataTables_filter input').addClass("form-control");
+
+				var setPaginateButtons = function() {
+					$('.dataTables_paginate span a').addClass("btn btn-default");
+					$('.dataTables_paginate a').removeClass("paginate_button");
+				}
+
+				$('.dataTables_length select').change(function() {
+					setPaginateClick();
+				});
+
+				function setPaginateClick() {
+					setPaginateButtons();
+					$('.dataTables_paginate a').click(function() {
+						setPaginateClick();
+					});
+				}
+				setPaginateClick();
+
+				//set id for delete modal
+				$('button[data-to-delete-id]').on('click', function() {
+					$('#buildingId').val($(this).attr("data-to-delete-id"));
+				});
+
+				$('.datatables').on('draw.dt', function() {
+					$('.dataTables_length select').change(function() {
+						setPaginateClick();
+					});
+					setPaginateClick();
+
+					//set id for delete modal
+					$('button[data-to-delete-id]').on('click', function() {
+						$('#buildingId').val($(this).attr("data-to-delete-id"));
+					});
+				});
+
+			} ());
+		</script>
+		<!-- JavaScript for the page End -->
+	</div>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<!-- 
+	Copyright 2018 Travis Spinelli
+	
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.  
+	You may obtain a copy of the License at
+	
+	http://www.apache.org/licenses/LICENSE-2.0
+	
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+-->
+<head>
+    <meta charset="utf-8">
+	<title>Buildings - Edit</title>
+
+	<link rel="stylesheet" type="text/css" href="../../../common/style.css" />
+	<script type="text/javascript" src="../../../assets/bootstrap/js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="../../../assets/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../../../assets/DataTables/datatables.min.js"></script>
+</head>
+<body>
+	<div id="wrapper">
+
+		<!-- Navbar Start -->
+		<div id="nav" class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container col-xs-12">
+				<div class="navbar-header">
+					<img src="../../../images/Champlain_Compass_Logo.png" alt="Champlain Compass Logo" class="logo_img" />
+					<a class="navbar-brand navbar-brand-logo" href="/index/{{sessionId}}">Champlain Compass</a>
+					
+					<button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#navbar-list" aria-expanded="false">
+						<span class="sr-only">Toggle Navigation</span>
+						<span class="fa fa-bars"></span>
+					</button>
+				</div>
+				
+				<div id="navbar-list" class="navbar-collapse collapse" aria-expanded="false">
+					<ul class="nav navbar-nav list-group">
+						<li class="active">
+							<a href="/buildings/{{sessionId}}">Buildings</a>
+						</li>
+						<li>
+							<a href="/events/{{sessionId}}">Events</a>
+						</li>
+						<li>
+							<a href="/faqs/{{sessionId}}">FAQs</a>
+						</li>
+						<li>
+							<a href="/presenters/{{sessionId}}">Presenters</a>
+						</li>
+						<li>
+							<a href="/resources/{{sessionId}}">Resources</a>
+						</li>
+						<li>
+							<a href="/themes/{{sessionId}}">Themes</a>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Files <span class="fa fa-caret-down"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="/files/{{sessionId}}">Logos</a></li>
+								<li><a href="/files/{{sessionId}}/resources">Resources</a></li>
+							</ul>
+						</li>
+						<li>
+							<a href="/logout/{{sessionId}}">Logout</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- Navbar End -->
+
+		<!-- Main Content Start -->
+		<div id="content">
+			<h1>Edit Building</h1>
+
+			<form name="edit_building_form" action="/buildings/{{sessionId}}/edit" method="POST">
+				<div class="col-sm-12 form-div">
+					<label for="name" class="form-label col-sm-3">Building Name: </label>
+					<div class="col-sm-7 {{#if errors.name}} has-error {{/if}}">
+						<input name="name" id="name" class="form-control" value="{{building.Name}}" type="text" />
+						{{#if errors.name}}
+							<div class="danger well well-sm">
+								<p>{{errors.name.msg}}</p>
+							</div>
+						{{/if}}
+					</div>
+				</div>
+
+				<div class="col-sm-12 form-div">
+					<div class="form-label col-sm-3">
+						<label for="address" class="form-label">Address: </label>
+						<button type="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" class="fa fa-info-circle btn btn-link" title="Address" data-content="The Address field is meant to store the physical address of the buidling. Please structure this address as Street, City, State. You do not need to include the zip code. This address will be used by the map to mark the buidling's location and provide directions."></button>
+					</div>
+					<div class="col-sm-7 {{#if errors.address}} has-error {{/if}}">
+						<input name="address" id="address" class="form-control" value="{{building.Address}}" type="text" />
+						{{#if errors.address}}
+							<div class="danger well well-sm">
+								<p>{{errors.address.msg}}</p>
+							</div>
+						{{/if}}
+					</div>
+				</div>
+
+				<div class="col-sm-12 form-div">
+					<div class="form-label col-sm-3">
+						<label for="is_active" class="form-label">Is Active:</label>
+						<button type="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" class="fa fa-info-circle btn btn-link" title="Is Active" data-content="The Is Active field is used to detemrine whether or not this item should be visible in the Champlain Compass mobile app. If this field is set to true (the box is checked), it will be visible to user of the mobile app. Otherwise this item will not appear in the mobile app."></button>
+					</div>
+					<div class="col-sm-7">
+						<input name="is_active" id="is_active" class="form-control" type="checkbox" {{#if building.Is_Active}}checked="checked"{{/if}} />
+					</div>
+				</div>
+
+				<div class="col-sm-12 form-button-div">
+					<input type="hidden" name="buildingId" id="buildingId" class="form-control" value="{{buildingId}}" />
+					<button class="btn btn-primary" type="submit">Save</button>
+					<a class="btn btn-default" href="/buildings/{{sessionId}}">Cancel</a>
+				</div>
+			</form>
+
+		</div>
+		<!-- Main Content End -->
+
+		<script type="text/javascript">
+			$(function() {
+			  $('[data-toggle="popover"]').popover()
+			});
+		</script>
+
+	</div>
+</body>
+</html>

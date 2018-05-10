@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "champlain-compass",
+  "private_key_id": "55e6e3c6076938b6f883ebb27d0f22e04c6cba39",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQCVyQ6/BFpe30Pl\nlbvlzrEEZyBLoJ8+hL0fsjKRNb0fp8p6B/7iQV+czQxFDgHH5gGeCyS4oOnOu0mc\nyR1xX71OcS69n/SwvbNpKSBDuLGCOXtn+PQB3xbtT+mxQ+nQ5UyshdGsYBzwfUab\nTWEOudSvZhUHWk+FokziLyk4PNIlN3dEQhTL63U02OkadyDaTM7jc6XVIsvDWGHP\nDbNOCaoAYlu/JuKr2QjKGFWonPgXzAfU8DT0+mxzZB4YbERQUMcMyQkDlFMIdo6A\nyoxQAx+kyDptlwmMkzuo+gGlRFB8i94lPVdNpaiwKLiDoBV6WM9RMDDDtzFoIXjL\nk88mEnGpAgMBAAECggEAAPllC2iBlvbgR+y8o17AB32NN/i0OHGgEkX0Lr4Y/Az5\nE+ib54hR0SEDSKqx58Uu8wJzC3Fee+37aVXkh2F+R3WUfn69Fm4xbchq8Y3Qt75c\nd11m5uE20rXPmQvOSEHJiSC4r6STY5wI+scaz7/1KmvhTKIxfLbExb7VR4ybuEq8\nw09YJM0ixeZ+myb8NmRLcFWos/ZDwpjbzQMdcMnhhueZvcCAJBFMj+QFxsCLndSx\nweHOYQgvoQCMdns69xDmW6zb7RL0G3ISFXTWx0eXwTDO6K88qCc5KdbsQY9yFv4H\njOtkgkP6YB/GaKt1jskYBVPaHUFuieFcwG8cNSkY9QKBgQDIp0E5wgY5pHqI8vxZ\nFvhxLLpe3l+1ig3DBOq+NxSzHBje6ehN6E/8vLJx5PxnZiz+Uq4TDnUC+sIT/Ls8\nN69h7FDT4P92ZJ84qyJuz0ZVF2NBMPCNKJVVU45DjAjm6cES0iZpQpZ/kqD6olZM\nOvgYeDHkykxmnmSDqcivpX90pQKBgQC/Gdxl1jorxtx+sikIGYJppdk8YYklnytz\neY7w8YcEiJ77y6PYI4PdPiUTfveUOLd1RKj56JWH/PSkI/vWOD4LJNfwtVjYMjk2\nln3IctnmKMInovZ1jMDmcjJ6sVwN3v64Iu07bIMjphLB95bTKRCm+rPb5niUP1zI\nz5iWtMrFtQKBgQC7RuAp+F23Dz0O9TtyK25Ws1h/ky3hUqjljIFMaDx5r4/G/qpD\njMCbM8OZag/qsgLsnF68ipHL5h+eaBSZb5/R1a7bEvVcmy3Axnms0ujiIqIRBox+\nM5KtwP7XLKxiWWpLFrmjJPMyvrhhNYM2QxOsQwLOd8I3RT6rZJxa1CzRwQKBgQCd\n5DwZV/sQGGots/361zjNGV53aQ7rqqs36YOUx7oKoObam9JvzkgxEBuKFClyqbnK\nhkQm12hUx0dKJwD4ade5VWOlWfBiEHz9ATJD38DxTVO9dAO18+mdfVT/0nKAc3J5\nqUHhCzL+zURKRsqzBQbhL9pTIgUWV5PNxtgIDLBM0QKBgQCHtDNd8q/prVb0CpfY\n8//Y3nPcgRtD5RLrbwz87zPRPxIc79bu/dFnsvbqVk7+63jCAZN5/JdRYw387DiH\nxUGVP0VK2dtEe8/n3Jlvvkr5/KNehQm4r7TuEVBb0Y1CeoJuuN6HdkILTBQN/19l\nEH11SwrBJ4o/ORzZpHaOPfECGg==\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-quacy@champlain-compass.iam.gserviceaccount.com",
+  "client_id": "110472082754628192367",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-quacy%40champlain-compass.iam.gserviceaccount.com"
+}

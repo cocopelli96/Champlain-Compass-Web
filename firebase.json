@@ -1,0 +1,149 @@
+{
+  "database": {
+    "rules": "database.rules.json"
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "functions": {
+    "predeploy": [
+      "npm --prefix $RESOURCE_DIR run lint"
+    ]
+  },
+  "hosting": {
+    "public": "public",
+    "rewrites": [{
+      "source": "/login",
+      "function": "app"
+    }, {
+      "source": "/logout/*",
+      "function": "app"
+    }, {
+      "source": "/index/*",
+      "function": "app"
+    }, {
+      "source": "/files/*",
+      "function": "app"
+    }, {
+      "source": "/files/*/logos",
+      "function": "app"
+    }, {
+      "source": "/files/*/resources",
+      "function": "app"
+    }, {
+      "source": "/files/*/Resources",
+      "function": "app"
+    }, {
+      "source": "/files/*/create",
+      "function": "app"
+    }, {
+      "source": "/files/*/Resources/create",
+      "function": "app"
+    }, {
+      "source": "/files/*/resources/create",
+      "function": "app"
+    }, {
+      "source": "/files/*/delete",
+      "function": "app"
+    }, {
+      "source": "/faqs/*",
+      "function": "app"
+    }, {
+      "source": "/faqs/*/create",
+      "function": "app"
+    }, {
+      "source": "/faqs/*/edit",
+      "function": "app"
+    }, {
+      "source": "/faqs/*/edit/*",
+      "function": "app"
+    }, {
+      "source": "/faqs/*/delete",
+      "function": "app"
+    }, {
+      "source": "/buildings/*",
+      "function": "app"
+    }, {
+      "source": "/buildings/*/create",
+      "function": "app"
+    }, {
+      "source": "/buildings/*/edit",
+      "function": "app"
+    }, {
+      "source": "/buildings/*/edit/*",
+      "function": "app"
+    }, {
+      "source": "/buildings/*/delete",
+      "function": "app"
+    }, {
+      "source": "/events/*",
+      "function": "app"
+    }, {
+      "source": "/events/*/create",
+      "function": "app"
+    }, {
+      "source": "/events/*/edit",
+      "function": "app"
+    }, {
+      "source": "/events/*/edit/*",
+      "function": "app"
+    }, {
+      "source": "/events/*/delete",
+      "function": "app"
+    }, {
+      "source": "/themes/*",
+      "function": "app"
+    }, {
+      "source": "/themes/*/create",
+      "function": "app"
+    }, {
+      "source": "/themes/*/edit",
+      "function": "app"
+    }, {
+      "source": "/themes/*/edit/*",
+      "function": "app"
+    }, {
+      "source": "/themes/*/delete",
+      "function": "app"
+    }, {
+      "source": "/resources/*",
+      "function": "app"
+    }, {
+      "source": "/resources/*/create",
+      "function": "app"
+    }, {
+      "source": "/resources/*/edit",
+      "function": "app"
+    }, {
+      "source": "/resources/*/edit/*",
+      "function": "app"
+    }, {
+      "source": "/resources/*/delete",
+      "function": "app"
+    }, {
+      "source": "/presenters/*",
+      "function": "app"
+    }, {
+      "source": "/presenters/*/create",
+      "function": "app"
+    }, {
+      "source": "/presenters/*/edit",
+      "function": "app"
+    }, {
+      "source": "/presenters/*/edit/*",
+      "function": "app"
+    }, {
+      "source": "/presenters/*/delete",
+      "function": "app"
+    }],
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  },
+  "storage": {
+    "rules": "storage.rules"
+  }
+}

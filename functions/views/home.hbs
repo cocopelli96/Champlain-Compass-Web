@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<!-- 
+	Copyright 2018 Travis Spinelli
+	
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.  
+	You may obtain a copy of the License at
+	
+	http://www.apache.org/licenses/LICENSE-2.0
+	
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+-->
+<head>
+    <meta charset="utf-8">
+	<title>Champlain Compass</title>
+
+	<link rel="stylesheet" type="text/css" href="../common/style.css" />
+	<script type="text/javascript" src="../assets/bootstrap/js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="../assets/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../assets/DataTables/datatables.min.js"></script>
+</head>
+<body>
+	<div id="wrapper">
+
+		<!-- Navbar Start -->
+		<div id="nav" class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container col-xs-12">
+				<div class="navbar-header">
+					<img src="../images/Champlain_Compass_Logo.png" alt="Champlain Compass Logo" class="logo_img" />
+					<a class="navbar-brand navbar-brand-logo" href="/index/{{sessionId}}">Champlain Compass</a>
+					
+					<button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#navbar-list" aria-expanded="false">
+						<span class="sr-only">Toggle Navigation</span>
+						<span class="fa fa-bars"></span>
+					</button>
+				</div>
+				
+				<div id="navbar-list" class="navbar-collapse collapse" aria-expanded="false">
+					<ul class="nav navbar-nav list-group">
+						<li>
+							<a href="/buildings/{{sessionId}}">Buildings</a>
+						</li>
+						<li>
+							<a href="/events/{{sessionId}}">Events</a>
+						</li>
+						<li>
+							<a href="/faqs/{{sessionId}}">FAQs</a>
+						</li>
+						<li>
+							<a href="/presenters/{{sessionId}}">Presenters</a>
+						</li>
+						<li>
+							<a href="/resources/{{sessionId}}">Resources</a>
+						</li>
+						<li>
+							<a href="/themes/{{sessionId}}">Themes</a>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Files <span class="fa fa-caret-down"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="/files/{{sessionId}}">Logos</a></li>
+								<li><a href="/files/{{sessionId}}/resources">Resources</a></li>
+							</ul>
+						</li>
+						<li>
+							<a href="/logout/{{sessionId}}">Logout</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- Navbar End -->
+
+		<!-- Main Content Start -->
+		<div id="content">
+		    <h1>Champlain Compass</h1>
+		    <p>Welcome to the Champlain Compass Database Web Interface. This site is designed to help you quickly update and manage the Champlain Compass mobile app through the data located in its database.</p>
+		    <p>Now that you have logged in use the navbar to proceed to the data that you want to update.</p>
+	    </div>
+		<!-- Main Content End -->
+
+	</div>
+</body>
+</html>
